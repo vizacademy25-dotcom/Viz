@@ -205,7 +205,7 @@
     <main class="flex-grow">
 
         <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
-        <section id="home" class="relative min-h-screen bg-viz-black flex items-center overflow-hidden">
+        <section id="home" class="relative min-h-screen bg-viz-black flex items-center overflow-x-hidden">
 
             <!-- Background layer -->
             <div class="absolute inset-0 pointer-events-none"></div>
@@ -295,55 +295,55 @@
 
                     <!-- ░░ Layer 4: Floating Adobe badges — naturally positioned around the scene ░░ -->
 
-                    <!-- Premiere Pro — top left, outside image -->
-                    <div class="icon-badge animate-float z-20 absolute top-[8%] left-[-2%]
-                                bg-[#0c0c20]/85 px-4 py-3 rounded-[14px] hidden sm:flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-[8px] flex items-center justify-center shrink-0"
+                    <!-- Premiere Pro — top left -->
+                    <div class="icon-badge animate-float z-30 absolute top-[2%] left-[2%] sm:top-[8%] sm:left-[-2%]
+                                bg-[#0c0c20]/85 px-2.5 py-2 sm:px-4 sm:py-3 rounded-[10px] sm:rounded-[14px] flex items-center gap-2 sm:gap-3">
+                        <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-[6px] sm:rounded-[8px] flex items-center justify-center shrink-0"
                              style="background:linear-gradient(135deg,#2d2d7a,#1a1a5c);">
-                            <span class="text-[#9999ff] font-black text-sm leading-none">Pr</span>
+                            <span class="text-[#9999ff] font-black text-[10px] sm:text-sm leading-none">Pr</span>
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-white text-[11px] font-semibold leading-none">Premiere Pro</span>
-                            <span class="text-white/40 text-[9px] mt-0.5">Video Editing</span>
+                            <span class="text-white text-[9px] sm:text-[11px] font-semibold leading-none">Premiere Pro</span>
+                            <span class="text-white/40 text-[7px] sm:text-[9px] mt-0.5">Video Editing</span>
                         </div>
                     </div>
 
                     <!-- After Effects — bottom left -->
-                    <div class="icon-badge animate-float-alt z-20 absolute bottom-[12%] left-[-4%]
-                                bg-[#130920]/85 px-4 py-3 rounded-[14px] hidden sm:flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-[8px] flex items-center justify-center shrink-0"
+                    <div class="icon-badge animate-float-alt z-30 absolute bottom-[4%] left-[2%] sm:bottom-[12%] sm:left-[-4%]
+                                bg-[#130920]/85 px-2.5 py-2 sm:px-4 sm:py-3 rounded-[10px] sm:rounded-[14px] flex items-center gap-2 sm:gap-3">
+                        <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-[6px] sm:rounded-[8px] flex items-center justify-center shrink-0"
                              style="background:linear-gradient(135deg,#3d1a6e,#27104a);">
-                            <span class="text-[#b073ff] font-black text-sm leading-none">Ae</span>
+                            <span class="text-[#b073ff] font-black text-[10px] sm:text-sm leading-none">Ae</span>
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-white text-[11px] font-semibold leading-none">After Effects</span>
-                            <span class="text-white/40 text-[9px] mt-0.5">Motion Graphics</span>
+                            <span class="text-white text-[9px] sm:text-[11px] font-semibold leading-none">After Effects</span>
+                            <span class="text-white/40 text-[7px] sm:text-[9px] mt-0.5">Motion Graphics</span>
                         </div>
                     </div>
 
                     <!-- Photoshop — top right -->
-                    <div class="icon-badge animate-float z-20 absolute top-[6%] right-[-2%]
-                                bg-[#061625]/85 px-4 py-3 rounded-[14px] hidden sm:flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-[8px] flex items-center justify-center shrink-0"
+                    <div class="icon-badge animate-float z-30 absolute top-[4%] right-[2%] sm:top-[6%] sm:right-[-2%]
+                                bg-[#061625]/85 px-2.5 py-2 sm:px-4 sm:py-3 rounded-[10px] sm:rounded-[14px] flex items-center gap-2 sm:gap-3">
+                        <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-[6px] sm:rounded-[8px] flex items-center justify-center shrink-0"
                              style="background:linear-gradient(135deg,#0b3a5c,#062440);">
-                            <span class="text-[#31a8ff] font-black text-sm leading-none">Ps</span>
+                            <span class="text-[#31a8ff] font-black text-[10px] sm:text-sm leading-none">Ps</span>
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-white text-[11px] font-semibold leading-none">Photoshop</span>
-                            <span class="text-white/40 text-[9px] mt-0.5">Photo Design</span>
+                            <span class="text-white text-[9px] sm:text-[11px] font-semibold leading-none">Photoshop</span>
+                            <span class="text-white/40 text-[7px] sm:text-[9px] mt-0.5">Photo Design</span>
                         </div>
                     </div>
 
                     <!-- Illustrator — bottom right -->
-                    <div class="icon-badge animate-float-alt z-20 absolute bottom-[10%] right-[-2%]
-                                bg-[#1c0a00]/85 px-4 py-3 rounded-[14px] hidden sm:flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-[8px] flex items-center justify-center shrink-0"
+                    <div class="icon-badge animate-float-alt z-30 absolute bottom-[6%] right-[2%] sm:bottom-[10%] sm:right-[-2%]
+                                bg-[#1c0a00]/85 px-2.5 py-2 sm:px-4 sm:py-3 rounded-[10px] sm:rounded-[14px] flex items-center gap-2 sm:gap-3">
+                        <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-[6px] sm:rounded-[8px] flex items-center justify-center shrink-0"
                              style="background:linear-gradient(135deg,#7a3500,#4a2000);">
-                            <span class="text-[#FF9A00] font-black text-sm leading-none">Ai</span>
+                            <span class="text-[#FF9A00] font-black text-[10px] sm:text-sm leading-none">Ai</span>
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-white text-[11px] font-semibold leading-none">Illustrator</span>
-                            <span class="text-white/40 text-[9px] mt-0.5">Vector Design</span>
+                            <span class="text-white text-[9px] sm:text-[11px] font-semibold leading-none">Illustrator</span>
+                            <span class="text-white/40 text-[7px] sm:text-[9px] mt-0.5">Vector Design</span>
                         </div>
                     </div>
                 </div>
@@ -659,17 +659,13 @@
                 <div class="flex justify-center animate-fade-up delay-200 mt-10 md:mt-12">
                     <a href="https://wa.me/918590008225?text=Hi%20Viz%20Academy!%20I%20want%20to%20know%20more%20about%20your%20courses."
                        target="_blank"
-                       class="inline-flex items-center justify-center gap-2 text-white font-semibold transition-all duration-300 w-full max-w-full md:max-w-[420px] h-[56px] rounded-full text-[15px] md:text-[16px]"
+                       class="inline-flex items-center justify-center gap-2 px-7 md:px-8 text-white font-semibold transition-all duration-300 w-max h-[40px] rounded-full text-[13px] md:text-[14px]"
                        style="background:#FF5A1F; box-shadow: 0 12px 30px rgba(255,90,31,0.25);"
                        onmouseenter="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 16px 36px rgba(255,90,31,0.35)';"
                        onmouseleave="this.style.transform='translateY(0)'; this.style.boxShadow='0 12px 30px rgba(255,90,31,0.25)';"
-                       aria-label="Start Your Creative Journey">
-                        Start Your Creative Journey
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
-                </div>
-
-            </div>-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                       aria-label="Start Learning">
+                        Start Learning
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
 
