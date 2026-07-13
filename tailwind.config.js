@@ -16,7 +16,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Open Sans', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
       },
       borderRadius: {
         'xl': '12px',
