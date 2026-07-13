@@ -21,9 +21,9 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-viz-orange text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-[1.03] hover:box-glow w-full sm:w-auto text-center">
+            <a href="#courses" className="bg-viz-orange text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:scale-[1.03] hover:box-glow w-full sm:w-auto text-center inline-block">
               Explore Courses →
-            </button>
+            </a>
             <button className="bg-transparent border border-white text-white px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-white/5 flex items-center justify-center gap-2 w-full sm:w-auto">
               <Play className="w-5 h-5" />
               Watch Intro

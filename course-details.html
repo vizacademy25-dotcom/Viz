@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - Creoviz Academy</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        viz: {
+                            black: '#0b0b0b',
+                            orange: '#FF6B00',
+                            white: '#ffffff',
+                            gray: '#6b7280',
+                            bg: '#ffffff',
+                            card: '#ffffff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #0b0b0b;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background-color: rgba(17, 17, 17, 0.95); /* #111111 */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(255, 107, 0, 0.35);
+            border-radius: 12px !important;
+            min-height: 48px;
+            padding-left: 32px !important;
+            padding-right: 32px !important;
+            font-weight: 700 !important;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 107, 0, 0.55);
+            filter: brightness(1.1);
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,107,0,0.08) 0%, rgba(255,255,255,0) 70%);
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fade-up 0.8s ease-out forwards; opacity: 0; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        .btn-nav-cta {
+            background: linear-gradient(135deg, #FF8A00 0%, #FF6B00 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(255, 107, 0, 0.35);
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            border: none;
+        }
+        .btn-nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 107, 0, 0.55);
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-viz-black bg-viz-bg">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-2 group">
+                    <img src="./src/assets/logo.png" alt="Viz Academy" class="h-8 md:h-10 w-auto" />
+                </a>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-white hover:text-[#FF6B00] transition-colors font-display font-medium">Home</a>
+                    <a href="#about" class="text-white font-semibold hover:text-[#FF6B00] transition-colors">Overview</a>
+                    <a href="#curriculum" class="text-white font-semibold hover:text-[#FF6B00] transition-colors">Curriculum</a>
+                    <a href="#faq" class="text-white font-semibold hover:text-[#FF6B00] transition-colors">FAQ</a>
+                </nav>
+                
+                <!-- CTA -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="index.html#contact" class="btn-nav-cta">
+                        Contact Us &rarr;
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white p-2 font-display font-medium">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-[#111111] border-t border-white/10 absolute w-full z-40 shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="index.html" class="block px-4 py-3 text-white font-semibold rounded-lg hover:bg-white/5">Home</a>
+                <a href="#about" class="block px-4 py-3 text-white font-semibold rounded-lg hover:bg-white/5">Overview</a>
+                <a href="#curriculum" class="block px-4 py-3 text-white font-semibold rounded-lg hover:bg-white/5">Curriculum</a>
+                <a href="#faq" class="block px-4 py-3 text-white font-semibold rounded-lg hover:bg-white/5">FAQ</a>
+                <a href="#" onclick="openEnrollModal(event)" class="block w-full mt-4 btn-primary text-white font-semibold rounded-xl px-4 py-3 text-center">
+                    Enroll Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16">
+        <div class="hero-glow"></div>
+        
+        <!-- Hero Section -->
+        <section class="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-fade-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-[#FF6B00] text-sm font-semibold mb-6">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Premium Course
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl text-viz-black leading-tight mb-6 font-display font-extrabold">
+                    Master <span id="hero-title" class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8C35]">Graphic Design</span>
+                </h1>
+                <p id="hero-desc" class="text-lg text-viz-gray mb-8 leading-relaxed max-w-xl">
+                    Learn graphic design from the basics with practical projects and expert guidance.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 mb-8">
+                    <div class="bg-gray-50 rounded-2xl p-4 pr-8 border border-gray-100">
+                        <p class="text-xs text-viz-gray uppercase tracking-wider mb-1">Course Fee</p>
+                        <p id="hero-price" class="text-[30px] text-viz-black font-display font-bold">₹9,999</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-4 pr-8 border border-gray-100">
+                        <p class="text-xs text-viz-gray uppercase tracking-wider mb-1">Duration</p>
+                        <p id="hero-duration" class="text-2xl text-viz-black font-display font-bold">24 Hours</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" onclick="openEnrollModal(event)" class="btn-primary text-white font-semibold rounded-xl px-8 py-4 transition-all">
+                        Enroll Now
+                    </a>
+                    <a href="#about" class="px-6 py-4 rounded-xl font-semibold text-viz-black hover:bg-gray-50 transition-colors">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="animate-fade-up delay-200 relative lg:ml-auto">
+                <div class="w-full aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl overflow-hidden shadow-2xl relative group border border-gray-100 flex items-center justify-center">
+                    <div id="hero-image" class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1626785779189-92db44d32e92?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-90 transition-transform duration-700 group-hover:scale-105"></div>
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 bg-gray-50 border-y border-gray-100">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center animate-fade-up">
+                    <h2 class="text-3xl text-viz-black mb-6 leading-tight font-display font-semibold">About This Course</h2>
+                    <p id="about-desc" class="text-lg text-viz-gray leading-relaxed">
+                        This comprehensive course is designed for both beginners and intermediate creatives who want to elevate their craft. We bridge the gap between creative theory and practical application, ensuring you not only know how to use the tools but understand the "why" behind great work.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What You'll Learn -->
+        <section id="curriculum" class="py-20">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-16 animate-fade-up">
+                    <h2 class="text-3xl text-viz-black mb-4 leading-tight font-display font-semibold">What You'll Learn</h2>
+                    <p class="text-viz-gray max-w-2xl mx-auto">Master the core disciplines of visual communication through hands-on projects.</p>
+                </div>
+                
+                <div id="learn-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Software You'll Use -->
+        <section class="py-16 bg-white border-y border-gray-100">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+                <h2 class="text-2xl text-viz-black mb-10 leading-tight font-display font-semibold">Software You'll Master</h2>
+                <div id="software-grid" class="flex flex-wrap justify-center gap-6 md:gap-12">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Details Grid -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 md:p-12">
+                    <h2 class="text-3xl text-viz-black mb-8 text-center leading-tight font-display font-semibold">Course Overview</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center divide-x divide-gray-100">
+                        <div>
+                            <p class="text-viz-gray text-sm mb-1 uppercase tracking-wider">Duration</p>
+                            <p id="overview-duration" class="text-xl text-viz-black font-display font-bold">24 Hours</p>
+                        </div>
+                        <div>
+                            <p class="text-viz-gray text-sm mb-1 uppercase tracking-wider">Daily Class</p>
+                            <p class="text-xl text-viz-black font-display font-bold">1 Hour</p>
+                        </div>
+                        <div class="col-span-2 md:col-span-1 border-l-0 md:border-l">
+                            <p class="text-viz-gray text-sm mb-1 uppercase tracking-wider">Level</p>
+                            <p class="text-xl text-viz-black font-display font-bold">Beginner to Pro</p>
+                        </div>
+                        <div>
+                            <p class="text-viz-gray text-sm mb-1 uppercase tracking-wider">Language</p>
+                            <p class="text-xl text-viz-black font-display font-bold">English / Reg</p>
+                        </div>
+                        <div class="col-span-2 lg:col-span-1 border-l-0 lg:border-l">
+                            <p class="text-viz-gray text-sm mb-1 uppercase tracking-wider">Format</p>
+                            <p class="text-xl text-[#FF6B00] font-display font-bold">Live Online</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-20">
+            <div class="max-w-[540px] mx-auto px-6">
+                <div class="bg-[#111111] rounded-[20px] py-8 px-6 sm:px-10 text-center text-white shadow-xl relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==')] opacity-10"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-2xl md:text-3xl mb-3 leading-tight font-display font-semibold">Ready to Join?</h2>
+                        <p class="text-gray-300 text-sm md:text-base mb-6 max-w-sm mx-auto">Enroll today and start learning.</p>
+                        <a href="#" onclick="openEnrollModal(event)" class="btn-nav-cta">
+                            Enroll Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#111111] pt-16 pb-8 relative z-10 w-full">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+                <!-- Logo -->
+                <a href="index.html" class="inline-block">
+                    <img src="./src/assets/logo.png" alt="Viz Academy" class="h-[48px] w-auto" height="48" />
+                </a>
+                
+                <!-- Links -->
+                <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                    <a href="index.html#home" class="text-white/80 hover:text-[#FF6B00] text-[14px] font-semibold transition-colors">Home</a>
+                    <a href="index.html#about" class="text-white/80 hover:text-[#FF6B00] text-[14px] font-semibold transition-colors">About</a>
+                    <a href="index.html#courses" class="text-white/80 hover:text-[#FF6B00] text-[14px] font-semibold transition-colors">Courses</a>
+                    <a href="index.html#contact" class="text-white/80 hover:text-[#FF6B00] text-[14px] font-semibold transition-colors">Contact</a>
+                </div>
+
+                <!-- Socials -->
+                <div class="flex items-center gap-5">
+                    <a href="#" class="text-white/80 hover:text-[#FF6B00] transition-colors">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="text-white/80 hover:text-[#FF6B00] transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="#" class="text-white/80 hover:text-[#FF6B00] transition-colors">
+                        <span class="sr-only">YouTube</span>
+                        <svg class="h-[20px] w-[20px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-[#2A2A2A] pt-8 flex justify-center">
+                <p class="text-[#777777] text-[13px]">&copy; 2025 Viz Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Data Configuration for Dynamic Rendering
+        const courseData = {
+            'graphic-design': {
+                title: 'Graphic Design',
+                desc: 'Learn graphic design from the basics with practical projects and expert guidance.',
+                price: '₹9,999',
+                duration: '24 Hours',
+                image: "https://images.unsplash.com/photo-1626785779189-92db44d32e92?auto=format&fit=crop&q=80",
+                about: 'Learn graphic design from the basics with practical projects and expert guidance.',
+                learn: [
+                    { title: 'Design Principles', desc: 'Learn the fundamentals of effective visual design.' },
+                    { title: 'Typography', desc: 'Master fonts, spacing, and readable layouts.' },
+                    { title: 'Color Theory', desc: 'Use color to create visually appealing designs.' },
+                    { title: 'Logo Design', desc: 'Create unique and memorable brand logos.' },
+                    { title: 'Social Media Design', desc: 'Design engaging content for social media platforms.' },
+                    { title: 'Brand Identity', desc: 'Build consistent and professional brand identities.' }
+                ],
+                software: [
+                    { name: 'Photoshop', desc: 'Raster Graphics & Editing', icon: 'Ps', color: '#31A8FF' },
+                    { name: 'Illustrator', desc: 'Vector Design & Logos', icon: 'Ai', color: '#FF9A00' },
+                    { name: 'Lightroom', desc: 'Photo Editing & Retouching', icon: 'Lr', color: '#51C4FE' }
+                ]
+            },
+            'video-editing': {
+                title: 'Video Editing',
+                desc: 'Learn professional video editing through hands-on projects.',
+                price: '₹19,999',
+                duration: '48 Hours',
+                image: "https://images.unsplash.com/photo-1574717024453-354056fad631?auto=format&fit=crop&q=80",
+                about: 'Learn professional video editing through hands-on projects.',
+                learn: [
+                    { title: 'Video Basics', desc: 'Build a strong editing foundation.' },
+                    { title: 'Timeline Editing', desc: 'Organize and edit your videos.' },
+                    { title: 'Color Correction', desc: 'Enhance colors with ease.' },
+                    { title: 'Audio Mixing', desc: 'Improve sound quality.' },
+                    { title: 'Transitions & Effects', desc: 'Make videos smooth and engaging.' },
+                    { title: 'Exporting', desc: 'Share videos in the right format.' }
+                ],
+                software: [
+                    { name: 'Premiere Pro', desc: 'Professional Video Editing', icon: 'Pr', color: '#EA77FF' },
+                    { name: 'After Effects', desc: 'Motion Graphics & VFX', icon: 'Ae', color: '#9999FF' },
+                    { name: 'Photoshop', desc: 'Raster Graphics & Editing', icon: 'Ps', color: '#31A8FF' },
+                    { name: 'Audition', desc: 'Audio Editing & Mixing', icon: 'Au', color: '#00D8CC' },
+                    { name: 'CapCut', desc: 'Mobile & Desktop Video Editing', icon: 'Cc', color: '#1A1A1A' }
+                ]
+            },
+            'motion-graphics': {
+                title: 'Motion Graphics',
+                desc: 'Learn the art of motion graphics and visual storytelling.',
+                price: '₹29,999',
+                duration: '72 Hours',
+                image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80",
+                about: 'Learn animation, compositing, and visual effects through practical projects.',
+                learn: [
+                    { title: 'Animation', desc: 'Create smooth animations.' },
+                    { title: 'Keyframing', desc: 'Animate with keyframes.' },
+                    { title: 'Compositing', desc: 'Blend layers easily.' },
+                    { title: 'Text Animation', desc: 'Bring text to life.' },
+                    { title: '3D Tracking', desc: 'Track motion with ease.' },
+                    { title: 'Visual Effects', desc: 'Create amazing effects.' }
+                ],
+                software: [
+                    { name: 'After Effects', desc: 'Motion Graphics & VFX', icon: 'Ae', color: '#9999FF' },
+                    { name: 'Premiere Pro', desc: 'Professional Video Editing', icon: 'Pr', color: '#EA77FF' },
+                    { name: 'Photoshop', desc: 'Raster Graphics & Editing', icon: 'Ps', color: '#31A8FF' },
+                    { name: 'Illustrator', desc: 'Vector Design & Logos', icon: 'Ai', color: '#FF9A00' }
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Navbar blur on scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 20) {
+                    nav.classList.add('shadow-sm');
+                } else {
+                    nav.classList.remove('shadow-sm');
+                }
+            });
+
+            // URL Parameter parsing
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseKey = urlParams.get('course') || 'graphic-design';
+            const course = courseData[courseKey] || courseData['graphic-design'];
+
+            // Populate DOM Elements
+            document.title = `${course.title} - Creoviz Academy`;
+            document.getElementById('hero-title').innerText = course.title;
+            document.getElementById('hero-desc').innerText = course.desc;
+            document.getElementById('hero-price').innerText = course.price;
+            document.getElementById('hero-duration').innerText = course.duration;
+            document.getElementById('hero-image').style.backgroundImage = `url('${course.image}')`;
+            document.getElementById('about-desc').innerText = course.about;
+            document.getElementById('overview-duration').innerText = course.duration;
+
+            // Render "What You'll Learn" Grid
+            const learnGrid = document.getElementById('learn-grid');
+            let learnHtml = '';
+            course.learn.forEach(item => {
+                learnHtml += `
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-[#FF6B00] mb-4">
+                            <!-- Generic star icon for modules -->
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <h3 class="text-xl text-viz-black mb-2 font-display font-semibold">${item.title}</h3>
+                        <p class="text-viz-gray text-[16px] leading-relaxed">${item.desc}</p>
+                    </div>
+                `;
+            });
+            learnGrid.innerHTML = learnHtml;
+
+            // Render "Software You'll Master" Grid
+            const softwareGrid = document.getElementById('software-grid');
+            let softwareHtml = '';
+            course.software.forEach(sw => {
+                softwareHtml += `
+                    <div class="flex items-center gap-4 bg-gray-50 px-6 py-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-inner" style="background-color: ${sw.color};">
+                            ${sw.icon}
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-viz-black">${sw.name}</p>
+                            <p class="text-xs text-viz-gray">${sw.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            softwareGrid.innerHTML = softwareHtml;
+        });
+    </script>
+    <!-- Enrollment Modal -->
+    <div id="enrollModal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeEnrollModal()"></div>
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative z-10 transform scale-95 transition-transform duration-300" id="enrollModalContent">
+            <h3 class="text-2xl text-viz-black mb-2 font-display font-semibold">Enroll Now</h3>
+            <p class="text-viz-gray text-sm mb-6">Fill out the form below and we'll get in touch with you.</p>
+            
+            <form onsubmit="submitEnrollment(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-viz-black mb-1">Name</label>
+                        <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] transition-shadow" placeholder="Your full name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-viz-black mb-1">Email</label>
+                        <input type="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] transition-shadow" placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-viz-black mb-1">Phone Number</label>
+                        <input type="tel" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] transition-shadow" placeholder="+91 00000 00000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-viz-black mb-1">Course Name</label>
+                        <select id="enrollCourseSelect" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#FF6B00] transition-shadow bg-white text-viz-black appearance-none cursor-pointer">
+                            <option value="" disabled selected>Select a course...</option>
+                            <option value="graphic-design">Graphic Design</option>
+                            <option value="video-editing">Video Editing</option>
+                            <option value="motion-graphics">Motion Graphics</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeEnrollModal()" class="px-5 py-2.5 rounded-xl text-viz-gray hover:bg-gray-100 transition-colors font-display font-medium">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl text-white shadow-lg shadow-orange-500/30 hover:brightness-110 hover:-translate-y-0.5 transition-all font-display font-medium" style="background: linear-gradient(135deg, #FF6B00 0%, #FF7A1A 100%);">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const enrollModal = document.getElementById('enrollModal');
+        const enrollModalContent = document.getElementById('enrollModalContent');
+        
+        function openEnrollModal(e) {
+            e.preventDefault();
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentCourse = urlParams.get('course');
+            
+            enrollModal.classList.remove('opacity-0', 'pointer-events-none');
+            enrollModalContent.classList.remove('scale-95');
+            
+            // Auto-select the current course if it exists in the dropdown
+            if (currentCourse) {
+                const select = document.getElementById('enrollCourseSelect');
+                if (select) {
+                    Array.from(select.options).forEach(opt => {
+                        if (opt.value === currentCourse) {
+                            opt.selected = true;
+                        }
+                    });
+                }
+            }
+        }
+
+        function closeEnrollModal() {
+            enrollModal.classList.add('opacity-0', 'pointer-events-none');
+            enrollModalContent.classList.add('scale-95');
+        }
+
+        function submitEnrollment(e) {
+            e.preventDefault();
+            alert('Thank you for enrolling! We will contact you soon.');
+            closeEnrollModal();
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
